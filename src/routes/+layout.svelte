@@ -2,6 +2,8 @@
   import type { LayoutData } from "./$types";
   import { invalidate } from "$app/navigation";
   import { onMount } from "svelte";
+  import { Toaster } from "svelte-french-toast";
+
   import "../global.css";
 
   export let data: LayoutData;
@@ -28,3 +30,5 @@
 </svelte:head>
 
 <slot />
+
+<Toaster />
