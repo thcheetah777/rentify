@@ -70,6 +70,7 @@
 
   <!-- Email -->
   <Input
+    type="email"
     id="email"
     placeholder="name@company.com"
     bind:value={email}>
