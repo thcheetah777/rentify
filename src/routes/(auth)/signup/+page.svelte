@@ -1,7 +1,10 @@
 <script lang="ts">
-  import type { PageData } from "./$types";
   import toast from "svelte-french-toast";
   import { goto } from "$app/navigation";
+  import type { PageData } from "./$types";
+
+	import Button from "$components/Button.svelte";
+  import Input from "$components/Input.svelte";
 
   export let data: PageData;
 
@@ -47,58 +50,41 @@
   <!-- Name input group -->
   <div class="flex gap-2">
     <!-- First Name -->
-    <div class="w-1/2 space-y-1">
-      <label for="first-name">First name</label>
-      <input
-        type="text"
-        name="first-name"
-        id="first-name"
-        placeholder="John"
-        class="block w-full border border-neutral-200 bg-neutral-50 py-2 px-4 outline-none rounded-lg"
-        required
-        bind:value={name[0]} />
-    </div>
+    <Input
+      id="first-name"
+      containerClass="w-1/2"
+      placeholder="John"
+      bind:value={name[0]}>
+      First name
+    </Input>
 
     <!-- Last Name -->
-    <div class="w-1/2 space-y-1">
-      <label for="last-name">Last name</label>
-      <input
-        type="text"
-        name="last-name"
-        id="last-name"
-        placeholder="Smith"
-        class="block w-full border border-neutral-200 bg-neutral-50 py-2 px-4 outline-none rounded-lg"
-        required
-        bind:value={name[1]} />
-    </div>
+    <Input
+      id="last-name"
+      containerClass="w-1/2"
+      placeholder="Smith"
+      bind:value={name[1]}>
+      Last name
+    </Input>
   </div>
 
   <!-- Email -->
-  <div class="space-y-1">
-    <label for="email" class="block space-y-1">Email</label>
-    <input
-      type="email"
-      name="email"
-      id="email"
-      placeholder="name@company.com"
-      class="block w-full border border-neutral-200 bg-neutral-50 py-2 px-4 outline-none rounded-lg"
-      required
-      bind:value={email} />
-  </div>
+  <Input
+    id="email"
+    placeholder="name@company.com"
+    bind:value={email}>
+    Email
+  </Input>
 
   <!-- Password -->
-  <div class="space-y-1">
-    <label for="password" class="block space-y-1">Password</label>
-    <input
-      type="password"
-      name="password"
-      id="password"
-      placeholder="••••••••••"
-      class="block w-full border border-neutral-200 bg-neutral-50 py-2 px-4 outline-none rounded-lg"
-      minlength="6"
-      required
-      bind:value={password} />
-  </div>
+  <Input
+    type="password"
+    id="password"
+    placeholder="••••••••••"
+    bind:value={password}
+    minlength={6}>
+    Password
+  </Input>
 
   <!-- Terms of use -->
   <div class="block">
@@ -111,9 +97,7 @@
   </div>
 
   <!-- Create account button -->
-  <button class="bg-primary rounded-lg w-full text-white font-smooth p-3 shadow-lg font-medium">
-    Create Account
-  </button>
+  <Button type="submit">Create Account</Button>
 </form>
 
 <small class="text-center block text-neutral-500">
