@@ -11,8 +11,11 @@
   let name: [string, string] = ["", ""];
   let email = "";
   let password = "";
+  let loading = false;
 
   async function handleSignUp() {
+    loading = true;
+
     const { error } = await data.supabase.auth.signUp({
       email,
       password,
@@ -41,6 +44,8 @@
       toast.success("Sign up successful!");
       goto("/home");
     }
+
+    loading = false;
   }
 </script>
 
@@ -98,7 +103,7 @@
   </div>
 
   <!-- Create account button -->
-  <Button type="submit">Create Account</Button>
+  <Button type="submit" bind:loading>Create Account</Button>
 </form>
 
 <small class="text-center block text-neutral-500">

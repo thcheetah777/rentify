@@ -6,6 +6,9 @@ export default {
       "sans": ["Poppins", "sans"],
     },
     extend: {
+      scale: {
+        "smaller": "98%",
+      },
       fontFamily: {
         "smooth": ["Quicksand", "sans"],
         "accent": ["Space Grotesk", "sans-serif"],
