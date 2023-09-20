@@ -15,6 +15,11 @@ export default {
       },
       colors: {
         "primary": "#1e88e5",
+      },
+      spacing: {
+        "nav": "12vh",
+        "content": "88vh",
+        "sm": "2rem",
       }
     },
   },
