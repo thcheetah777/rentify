@@ -7,7 +7,6 @@
     containerClass?: string;
     id: string;
     optional?: boolean;
-    placeholder: string;
   };
 
   let className = "";
@@ -17,7 +16,6 @@
   export let id = "";
   export let value = "";
   export let optional = false;
-  export let placeholder = "";
 </script>
 
 <div class={cn("space-y-1", containerClass)}>

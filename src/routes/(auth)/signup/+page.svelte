@@ -11,6 +11,7 @@
   let name: [string, string] = ["", ""];
   let email = "";
   let password = "";
+
   let loading = false;
 
   async function handleSignUp() {
@@ -36,7 +37,7 @@
           break;
         }
         default: {
-          toast.error("There was an error signing you up");
+          toast.error("There was a problem signing you up");
           break;
         }
       }

@@ -12,4 +12,6 @@
   }
 </script>
 
+<h1>Welcome, {data.session?.user.user_metadata.first_name}</h1>
+
 <button on:click={handleLogOut}>Log out</button>
