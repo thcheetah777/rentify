@@ -32,23 +32,34 @@
     </a>
   </header>
 
+  <!-- Options menu -->
   <div class="relative">
     <button
       on:click={() => profileDropdown = !profileDropdown}
-      class="flex items-center gap-2 rounded-full px-4 py-2 border border-neutral-200">
+      class="flex items-center gap-2 rounded-full px-4 py-2 border border-neutral-200 hover:shadow-md duration-200">
       <iconify-icon icon="ic:round-menu" class="text-xl"></iconify-icon>
       <h1>{data.session?.user.user_metadata.first_name}</h1>
     </button>
 
+    <!-- Options dropdown -->
     {#if profileDropdown}
       <div
-        class="absolute py-2 z-10 w-60 right-0 rounded-lg shadow-lg bg-white text-sm"
-        transition:fade={{ duration: 50 }}>
+        class="absolute py-2 z-10 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm"
+        transition:fade={{ duration: 100 }}>
         <div class="hover:bg-neutral-100 px-4 py-2">
           <h1 class="font-semibold">
             {data.session?.user.user_metadata.first_name} {data.session?.user.user_metadata.last_name}
           </h1>
           <h2>{data.session?.user.email}</h2>
+        </div>
+
+        <div class="hover:bg-neutral-100 px-4 py-2">
+          <a
+            href="/profile"
+            class="w-full flex items-center justify-between">
+            <span>Profile</span>
+            <iconify-icon icon="gg:profile" class="text-xl"></iconify-icon>
+          </a>
         </div>
 
         <div class="hover:bg-neutral-100 px-4 py-2">

@@ -20,6 +20,9 @@ export default {
         "nav": "12vh",
         "content": "88vh",
         "sm": "2rem",
+      },
+      boxShadow: {
+        "around": "0px 0px 1.2rem rgba(0,0,0,0.08)",
       }
     },
   },
