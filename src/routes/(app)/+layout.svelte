@@ -25,11 +25,10 @@
 </script>
 
 <!-- Navbar cuz I'm lazy -->
-<nav class="flex items-center justify-between h-nav px-sm border border-neutral-200">
+<nav
+  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border border-neutral-200 bg-white z-10">
   <header>
-    <a href="/">
-      <Logo class="text-2xl" />
-    </a>
+    <a href="/"><Logo class="text-2xl" /></a>
   </header>
 
   <!-- Options menu -->
@@ -44,13 +43,15 @@
     <!-- Options dropdown -->
     {#if profileDropdown}
       <div
-        class="absolute py-2 z-10 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm"
+        class="absolute py-2 z-10 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm z-20"
         transition:fade={{ duration: 100 }}>
         <div class="hover:bg-neutral-100 px-4 py-2">
-          <h1 class="font-semibold">
-            {data.session?.user.user_metadata.first_name} {data.session?.user.user_metadata.last_name}
-          </h1>
-          <h2>{data.session?.user.email}</h2>
+          <a href="/profile">
+            <h1 class="font-semibold">
+              {data.session?.user.user_metadata.first_name} {data.session?.user.user_metadata.last_name}
+            </h1>
+            <h2>{data.session?.user.email}</h2>
+          </a>
         </div>
 
         <div class="hover:bg-neutral-100 px-4 py-2">
@@ -76,6 +77,6 @@
 </nav>
 
 <!-- Main page content -->
-<main class="h-content overflow-auto">
+<main class="overflow-auto mt-nav">
   <slot />
 </main>
