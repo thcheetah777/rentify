@@ -26,7 +26,7 @@
 
 <!-- Navbar cuz I'm lazy -->
 <nav
-  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border border-neutral-200 bg-white z-10">
+  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border border-border bg-white z-10">
   <header>
     <a href="/"><Logo class="text-2xl" /></a>
   </header>
@@ -35,7 +35,7 @@
   <div class="relative">
     <button
       on:click={() => profileDropdown = !profileDropdown}
-      class="flex items-center gap-2 rounded-full px-4 py-2 border border-neutral-200 hover:shadow-md duration-200">
+      class="flex items-center gap-2 rounded-full px-4 py-2 border border-border hover:shadow-md duration-200">
       <iconify-icon icon="ic:round-menu" class="text-xl"></iconify-icon>
       <h1>{data.session?.user.user_metadata.first_name}</h1>
     </button>

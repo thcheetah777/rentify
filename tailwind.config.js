@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+import colors from "tailwindcss/colors";
+
 export default {
   content: ["./src/**/*.{svelte,html,js,ts}"],
   theme: {
@@ -15,6 +18,7 @@ export default {
       },
       colors: {
         "primary": "#1e88e5",
+        "border": colors.neutral[200],
       },
       spacing: {
         "nav": "12vh",

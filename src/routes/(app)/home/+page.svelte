@@ -19,7 +19,7 @@
 
 <nav
   class={cn(
-    "flex items-center justify-center bg-white fixed top-nav border-neutral-200 w-full h-nav",
+    "flex items-center justify-center bg-white fixed top-nav border-border w-full h-nav",
     { "border-b": !topOfPage }
   )}>
   Hello
@@ -32,7 +32,7 @@
         <img
           src="https://source.unsplash.com/random/300x300?{item}"
           alt="Randomized"
-          class="bg-neutral-200 rounded-xl aspect-[10/9]" />
+          class="rounded-xl aspect-[10/9]" />
 
         <div class="text-sm">
           <h1 class="font-semibold">{item * 12345}</h1>
