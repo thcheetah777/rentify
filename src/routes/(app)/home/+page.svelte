@@ -3,14 +3,17 @@
   import { onMount } from "svelte";
   import { cn } from "$lib/utils";
   import { categories } from "$lib/categories";
-	import Button from "$components/Button.svelte";
   import { fade } from "svelte/transition";
+
+  import Modal from "$components/Modal.svelte";
+  import Button from "$components/Button.svelte";
 
   export let data: PageData;
 
   let topOfPage = true;
   let categoryBar: HTMLElement;
   let categoryBarScroll: "start" | "end" | "none" = "start";
+  let filterModal: Modal;
 
   function checkTopOfPage() {
     topOfPage = window.scrollY === 0;
@@ -91,13 +94,20 @@
   </div>
 
   <!-- Button for filtering -->
-  <Button class="flex items-center justify-center gap-2 w-28 h-2/3" outline>
+  <Button
+    on:click={filterModal.show}
+    class="flex items-center justify-center gap-2 w-28 h-2/3"
+    outline>
     <iconify-icon icon="gg:options" class="text-base"></iconify-icon>
     <span>Filter</span>
   </Button>
 </nav>
 
-<div class="mt-nav px-sm py-4">
+<Modal bind:this={filterModal} heading="Filters">
+  <h2 class="font-medium text-xl">Type of place</h2>
+</Modal>
+
+<div class="mt-nav px-sm pt-4 pb-sm">
   <ul class="grid grid-cols-4 gap-x-6 gap-y-sm">
     {#each new Array(20).fill(0).map((_, i) => i) as item}
       <li class="space-y-4">

@@ -1,5 +1,6 @@
 <script lang="ts">
   import { cn } from "$lib/utils";
+  import { createEventDispatcher } from "svelte";
   import type { HTMLButtonAttributes } from "svelte/elements";
 
   interface $$Props extends HTMLButtonAttributes {
@@ -24,7 +25,7 @@
       "bg-primary text-white rounded-lg shadow-lg active:shadow-none active:scale-smaller"
     ),
     className,
-  )} {...$$restProps}>
+  )} on:click {...$$restProps}>
   {#if loading}
     <iconify-icon icon="gg:spinner" class="animate-spin text-base"></iconify-icon>
   {:else}
