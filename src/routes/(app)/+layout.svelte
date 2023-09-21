@@ -1,10 +1,11 @@
 <script lang="ts">
   import type { LayoutData } from "./$types";
-  import toast from "svelte-french-toast";
   import { goto } from "$app/navigation";
   import { fade } from "svelte/transition";
+  import toast from "svelte-french-toast";
 
   import Logo from "$components/Logo.svelte";
+	import Input from "$components/Input.svelte";
 
   export let data: LayoutData;
 
@@ -26,10 +27,19 @@
 
 <!-- Navbar cuz I'm lazy -->
 <nav
-  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border border-border bg-white z-10">
+  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border border-border bg-white z-10 gap-sm">
   <header>
     <a href="/"><Logo class="text-2xl" /></a>
   </header>
+
+  <!-- Search bar -->
+  <form on:submit|preventDefault class="flex-grow">
+    <Input
+      id="search"
+      type="search"
+      class="rounded-full px-6 focus:border-border"
+      placeholder="Search Rentify..." />
+  </form>
 
   <!-- Options menu -->
   <div class="relative">
@@ -43,7 +53,7 @@
     <!-- Options dropdown -->
     {#if profileDropdown}
       <div
-        class="absolute py-2 z-10 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm z-20"
+        class="absolute py-2 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm z-20"
         transition:fade={{ duration: 100 }}>
         <div class="hover:bg-neutral-100 px-4 py-2">
           <a href="/profile">

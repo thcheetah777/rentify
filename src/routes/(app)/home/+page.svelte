@@ -58,7 +58,7 @@
         transition:fade={{ duration: 200 }}>
         <button
           on:click={() => scrollCategoryBar(-1)}
-          class="aspect-square rounded-full w-8 border border-border bg-white hover:shadow-md flex justify-center items-center relative left-2">
+          class="aspect-square rounded-full w-sm border border-border bg-white hover:shadow-md flex justify-center items-center relative left-2">
           <iconify-icon icon="ic:round-chevron-left" class="text-xl"></iconify-icon>
         </button>
       </div>
@@ -66,7 +66,7 @@
 
     {#each categories as category}
       <a
-        href="/home?tab={category.slug}"
+        href="/home?category={category.slug}"
         class={cn(
         "flex flex-col items-center text-neutral-500 h-full justify-center w-12 hover:text-neutral-900 duration-100 gap-1",
         { "text-neutral-900 border-neutral-900 border-b-2": category.slug === data.category },
@@ -83,7 +83,7 @@
         transition:fade={{ duration: 200 }}>
         <button
           on:click={() => scrollCategoryBar(1)}
-          class="aspect-square rounded-full w-8 border border-border bg-white hover:shadow-md flex justify-center items-center relative right-2">
+          class="aspect-square rounded-full w-sm border border-border bg-white hover:shadow-md flex justify-center items-center relative right-2">
           <iconify-icon icon="ic:round-chevron-right" class="text-xl"></iconify-icon>
         </button>
       </div>
@@ -92,7 +92,7 @@
 
   <!-- Button for filtering -->
   <Button class="flex items-center justify-center gap-2 w-28 h-2/3" outline>
-    <iconify-icon icon="gg:options" class="text-lg"></iconify-icon>
+    <iconify-icon icon="gg:options" class="text-base"></iconify-icon>
     <span>Filter</span>
   </Button>
 </nav>

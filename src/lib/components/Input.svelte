@@ -21,7 +21,7 @@
 <div class={cn("space-y-1", containerClass)}>
   <label for={id} class="block space-y-1"><slot /></label>
   <input class={cn(
-    "block w-full border border-border focus:border-primary bg-neutral-50 py-2 px-4 outline-none rounded-lg duration-200",
+    "block w-full border border-border focus:border-primary bg-white py-2 px-4 outline-none rounded-lg duration-200",
     className,
   )} bind:value required={!optional} {...$$restProps}>
 </div>
