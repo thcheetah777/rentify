@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { afterUpdate, beforeUpdate, onMount } from "svelte";
-  import { cn } from "$lib/utils";
+  import { afterUpdate } from "svelte";
+  import { USDollar, cn } from "$lib/utils";
   import { categories } from "$lib/categories";
   import { fade } from "svelte/transition";
 
@@ -121,7 +121,7 @@
             <h1 class="font-semibold">
               {product.category[0].toUpperCase() + product.category.slice(1)}
             </h1>
-            <h2 class="text-neutral-500">${product.price}</h2>
+            <h2 class="text-neutral-500">{USDollar.format(product.price)}</h2>
           </div>
         </li>
       {/each}
