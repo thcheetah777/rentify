@@ -69,7 +69,7 @@
             href="/profile"
             class="w-full flex items-center justify-between">
             <span>Profile</span>
-            <iconify-icon icon="gg:profile" class="text-xl"></iconify-icon>
+            <iconify-icon icon="gg:profile" class="text-lg"></iconify-icon>
           </a>
         </div>
 
@@ -78,7 +78,7 @@
             on:click={handleLogOut}
             class="w-full flex items-center justify-between">
             <span>Log Out</span>
-            <iconify-icon icon="gg:log-out" class="text-xl"></iconify-icon>
+            <iconify-icon icon="gg:log-out" class="text-lg"></iconify-icon>
           </button>
         </div>
       </div>
