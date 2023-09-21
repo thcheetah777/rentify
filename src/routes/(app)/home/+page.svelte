@@ -4,18 +4,42 @@
   import { cn } from "$lib/utils";
   import { categories } from "$lib/categories";
 	import Button from "$components/Button.svelte";
+  import { fade } from "svelte/transition";
 
   export let data: PageData;
 
   let topOfPage = true;
+  let categoryBar: HTMLElement;
+  let categoryBarScroll: "start" | "end" | "none" = "start";
 
   function checkTopOfPage() {
     topOfPage = window.scrollY === 0;
   }
 
+  function checkCategoryBar() {
+    if (categoryBar.scrollLeft === 0) {
+      categoryBarScroll = "start";
+    } else if (categoryBar.scrollWidth - categoryBar.scrollLeft - categoryBar.clientWidth < 1) {
+      categoryBarScroll = "end";
+    } else {
+      categoryBarScroll = "none";
+    }
+
+    console.log(categoryBarScroll);
+  }
+
+  function scrollCategoryBar(direction: -1 | 1) {
+    categoryBar.scrollBy(direction * 2000, 0);
+  }
+
   onMount(() => {
     document.addEventListener("scroll", checkTopOfPage);
-    () => document.removeEventListener("scroll", checkTopOfPage);
+    categoryBar.addEventListener("scroll", checkCategoryBar);
+
+    return () => {
+      document.removeEventListener("scroll", checkTopOfPage);
+      categoryBar.removeEventListener("scroll", checkCategoryBar);
+    }
   });
 </script>
 
@@ -24,7 +48,22 @@
     "px-12 bg-white fixed top-nav border-border w-full h-nav flex items-center gap-4",
     { "shadow-md": !topOfPage }
   )}>
-  <div class="overflow-auto no-scrollbar flex items-center gap-12 h-full pr-2">
+  <!-- Categories bar -->
+  <div
+    class="overflow-auto no-scrollbar flex items-center gap-[45px] h-full px-2 relative scroll-smooth"
+    bind:this={categoryBar}>
+    {#if categoryBarScroll !== "start"}
+      <div
+        class="fixed left-10 bg-gradient-to-r from-white from-80% w-16 h-nav flex items-center justify-start"
+        transition:fade={{ duration: 200 }}>
+        <button
+          on:click={() => scrollCategoryBar(-1)}
+          class="aspect-square rounded-full w-8 border border-border bg-white hover:shadow-md flex justify-center items-center relative left-2">
+          <iconify-icon icon="ic:round-chevron-left" class="text-xl"></iconify-icon>
+        </button>
+      </div>
+    {/if}
+
     {#each categories as category}
       <a
         href="/home?tab={category.slug}"
@@ -37,8 +76,21 @@
           <small class="font-smooth font-semibold">{category.name}</small>
       </a>
     {/each}
+
+    {#if categoryBarScroll !== "end"}
+      <div
+        class="fixed right-36 bg-gradient-to-l from-white from-80% w-16 h-nav flex items-center justify-end"
+        transition:fade={{ duration: 200 }}>
+        <button
+          on:click={() => scrollCategoryBar(1)}
+          class="aspect-square rounded-full w-8 border border-border bg-white hover:shadow-md flex justify-center items-center relative right-2">
+          <iconify-icon icon="ic:round-chevron-right" class="text-xl"></iconify-icon>
+        </button>
+      </div>
+    {/if}
   </div>
 
+  <!-- Button for filtering -->
   <Button class="flex items-center justify-center gap-2 w-28 h-2/3" outline>
     <iconify-icon icon="gg:options" class="text-lg"></iconify-icon>
     <span>Filter</span>
