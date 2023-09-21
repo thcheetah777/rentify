@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { onMount } from "svelte";
+  import { afterUpdate, beforeUpdate, onMount } from "svelte";
   import { cn } from "$lib/utils";
   import { categories } from "$lib/categories";
   import { fade } from "svelte/transition";
@@ -27,15 +27,13 @@
     } else {
       categoryBarScroll = "none";
     }
-
-    console.log(categoryBarScroll);
   }
 
   function scrollCategoryBar(direction: -1 | 1) {
     categoryBar.scrollBy(direction * 2000, 0);
   }
 
-  onMount(() => {
+  afterUpdate(() => {
     document.addEventListener("scroll", checkTopOfPage);
     categoryBar.addEventListener("scroll", checkCategoryBar);
 
@@ -71,12 +69,14 @@
       <a
         href="/home?category={category.slug}"
         class={cn(
-        "flex flex-col items-center text-neutral-500 h-full justify-center w-12 hover:text-neutral-900 duration-100 gap-1",
-        { "text-neutral-900 border-neutral-900 border-b-2": category.slug === data.category },
-        { "border-neutral-300 hover:border-b-2": category.slug !== data.category },
+        "text-neutral-500 h-full w-12 hover:text-neutral-900 duration-200 gap-1 group border-b-2",
+        { "text-neutral-900 border-neutral-900": category.slug === data.category },
+        { "hover:border-neutral-300 border-transparent": category.slug !== data.category },
       )}>
-          <iconify-icon icon={category.icon} class="text-2xl"></iconify-icon>
-          <small class="font-smooth font-semibold">{category.name}</small>
+          <div class="group-active:scale-95 duration-100 flex flex-col items-center justify-center h-full">
+            <iconify-icon icon={category.icon} class="text-2xl"></iconify-icon>
+            <small class="font-smooth font-semibold">{category.name}</small>
+          </div>
       </a>
     {/each}
 
@@ -107,20 +107,24 @@
   <h2 class="font-medium text-xl">Type of place</h2>
 </Modal>
 
-<div class="mt-nav px-sm pt-4 pb-sm">
-  <ul class="grid grid-cols-4 gap-x-6 gap-y-sm">
-    {#each new Array(20).fill(0).map((_, i) => i) as item}
-      <li class="space-y-4">
-        <img
-          src="https://source.unsplash.com/random/300x300?{item}"
-          alt="Randomized"
-          class="rounded-xl aspect-[10/9] object-cover" />
+{#if data.products}
+  <div class="mt-nav px-sm pt-4 pb-sm">
+    <ul class="grid grid-cols-4 gap-x-6 gap-y-sm">
+      {#each data.products as product (product.id)}
+        <li class="space-y-4">
+          <img
+            src={product.photo}
+            alt={product.category}
+            class="rounded-xl aspect-[10/9] object-cover" />
 
-        <div class="text-sm">
-          <h1 class="font-semibold">{item * 12345}</h1>
-          <h2 class="text-neutral-500">{item * 100}</h2>
-        </div>
-      </li>
-    {/each}
-  </ul>
-</div>
+          <div class="text-sm">
+            <h1 class="font-semibold">
+              {product.category[0].toUpperCase() + product.category.slice(1)}
+            </h1>
+            <h2 class="text-neutral-500">${product.price}</h2>
+          </div>
+        </li>
+      {/each}
+    </ul>
+  </div>
+{/if}

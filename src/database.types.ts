@@ -1,3 +1,5 @@
+import type { PostgrestError } from "@supabase/supabase-js"
+
 export type Json =
   | string
   | number
@@ -9,7 +11,33 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
-      [_ in never]: never
+      products: {
+        Row: {
+          created_at: string
+          id: number
+          price: number
+          stars: number
+          category: string
+          photo: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          price: number
+          stars: number
+          category: string
+          photo: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          price?: number
+          stars?: number
+          category?: string
+          photo?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -25,3 +53,9 @@ export interface Database {
     }
   }
 }
+
+export type Tables<T extends keyof Database["public"]["Tables"]> = Database["public"]["Tables"][T]["Row"];
+
+export type DbResult<T> = T extends PromiseLike<infer U> ? U : never;
+export type DbResultOk<T> = T extends PromiseLike<{ data: infer U}> ? Exclude<U, null> : never;
+export type DbResultError = PostgrestError;
