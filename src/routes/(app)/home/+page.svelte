@@ -39,7 +39,7 @@
     {/each}
   </div>
 
-  <Button class="flex items-center justify-center gap-2 w-32 h-2/3" outline>
+  <Button class="flex items-center justify-center gap-2 w-28 h-2/3" outline>
     <iconify-icon icon="gg:options" class="text-lg"></iconify-icon>
     <span>Filter</span>
   </Button>

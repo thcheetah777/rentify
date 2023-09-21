@@ -17,7 +17,7 @@
 
 <button
   class={cn(
-    "w-full font-smooth p-3 font-semibold duration-200 text-sm outline-none",
+    "w-full font-smooth font-semibold duration-200 text-sm outline-none p-3",
     (
       outline ?
       "border border-border rounded-xl bg-white text-black" :
