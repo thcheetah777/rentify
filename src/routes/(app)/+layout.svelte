@@ -3,6 +3,7 @@
   import { goto } from "$app/navigation";
   import { fade } from "svelte/transition";
   import toast from "svelte-french-toast";
+  import { cn } from "$lib/utils";
 
   import Logo from "$components/Logo.svelte";
 	import Input from "$components/Input.svelte";
@@ -46,7 +47,9 @@
     <button
       on:click={() => profileDropdown = !profileDropdown}
       class="flex items-center gap-2 rounded-full px-4 py-2 border border-border hover:shadow-md duration-200">
-      <iconify-icon icon="ic:round-menu" class="text-xl"></iconify-icon>
+      <iconify-icon
+        icon="ic:round-keyboard-arrow-up"
+        class={cn("text-xl duration-200", { "rotate-180": !profileDropdown })}></iconify-icon>
       <h1>{data.session?.user.user_metadata.first_name}</h1>
     </button>
 
