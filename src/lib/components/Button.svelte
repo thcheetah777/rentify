@@ -5,17 +5,24 @@
   interface $$Props extends HTMLButtonAttributes {
     class?: string;
     loading?: boolean;
+    outline?: boolean;
   };
 
   let className = "";
   export { className as class };
 
   export let loading = false;
+  export let outline = false;
 </script>
 
 <button
   class={cn(
-    "bg-primary rounded-lg w-full text-white font-smooth p-3 shadow-lg active:shadow-none active:scale-smaller font-semibold duration-200 text-sm",
+    "w-full font-smooth p-3 font-semibold duration-200 text-sm outline-none",
+    (
+      outline ?
+      "border border-border rounded-xl bg-white text-black" :
+      "bg-primary text-white rounded-lg shadow-lg active:shadow-none active:scale-smaller"
+    ),
     className,
   )} {...$$restProps}>
   {#if loading}
