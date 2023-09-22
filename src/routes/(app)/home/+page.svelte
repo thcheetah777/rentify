@@ -105,7 +105,27 @@
 </nav>
 
 <Modal bind:this={filterModal} heading="Filters">
-  <h2 class="font-medium text-xl">Type of place</h2>
+  <h2 class="font-medium text-xl">Price range</h2>
+  <!-- TODO price slider thingie -->
+  <div class="flex items-center gap-sm mx-sm">
+    <div class="h-full border border-neutral-400 rounded-lg flex-grow flex flex-col justify-center gap-0.5 py-2 px-3">
+      <small class="text-neutral-400 text-xs">Minimum</small>
+      <p>
+        <span class="pr-1">$</span>
+        100
+      </p>
+    </div>
+
+    <hr class="border-neutral-400 w-sm">
+
+    <div class="h-full border border-neutral-400 rounded-lg flex-grow flex flex-col justify-center gap-0.5 py-2 px-3">
+      <small class="text-neutral-400 text-xs">Maximum</small>
+      <p>
+        <span class="pr-1">$</span>
+        100
+      </p>
+    </div>
+  </div>
 </Modal>
 
 <!-- Items grid -->
