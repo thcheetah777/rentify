@@ -1,12 +1,13 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { afterUpdate, onMount } from "svelte";
-  import { USDollar, cn } from "$lib/utils";
+  import { onMount } from "svelte";
+  import { cn } from "$lib/utils";
   import { categories } from "$lib/categories";
   import { fade } from "svelte/transition";
 
   import Modal from "$components/Modal.svelte";
   import Button from "$components/Button.svelte";
+	import GridItem from "$components/GridItem.svelte";
 
   export let data: PageData;
 
@@ -31,20 +32,6 @@
 
   function scrollCategoryBar(direction: -1 | 1) {
     categoryBar.scrollBy(direction * 2000, 0);
-  }
-
-  function scrollNextElement(this: HTMLElement) {
-    this.nextElementSibling?.scrollBy({
-      left: -250,
-      behavior: "smooth",
-    });
-  }
-
-  function scrollPreviousElement(this: HTMLElement) {
-    this.previousElementSibling?.scrollBy({
-      left: 250,
-      behavior: "smooth",
-    });
   }
 
   onMount(() => {
@@ -121,49 +108,12 @@
   <h2 class="font-medium text-xl">Type of place</h2>
 </Modal>
 
+<!-- Items grid -->
 {#if data.products}
   <div class="mt-nav px-sm pt-4 pb-sm">
     <ul class="grid grid-cols-4 gap-x-6 gap-y-sm">
       {#each data.products as product (product.id)}
-        <li class="group">
-          <a href="/item/{product.id}" class="space-y-4">
-            <!-- Photo row container -->
-            <div class="relative">
-              <!-- Previous photo -->
-              <button
-                on:click|preventDefault={scrollNextElement}
-                class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
-                <iconify-icon icon="ic:round-chevron-left" class="text-lg"></iconify-icon>
-              </button>
-
-              <!-- Photo row -->
-              <div class="aspect-[10/9] overflow-x-auto flex snap-x snap-mandatory no-scrollbar rounded-xl">
-                {#if product.photos}
-                  {#each product.photos as photo}
-                    <img
-                      src={photo}
-                      alt={product.category}
-                      class="w-full h-full object-cover flex-shrink-0 snap-center" />
-                  {/each}
-                {/if}
-              </div>
-
-              <!-- Next photo -->
-              <button
-                on:click|preventDefault={scrollPreviousElement}
-                class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
-                <iconify-icon icon="ic:round-chevron-right" class="text-lg"></iconify-icon>
-              </button>
-            </div>
-
-            <div class="text-sm">
-              <h1 class="font-semibold">
-                {product.category[0].toUpperCase() + product.category.slice(1)}
-              </h1>
-              <h2 class="text-neutral-500">{USDollar.format(product.price)}</h2>
-            </div>
-          </a>
-        </li>
+        <GridItem {product} />
       {/each}
     </ul>
   </div>
