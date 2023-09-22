@@ -1,23 +1,11 @@
 <script lang="ts">
   import type { Tables } from "$src/database.types";
   import { USDollar } from "$lib/utils";
-  import { onMount } from "svelte";
   import { fade } from "svelte/transition";
 
   export let product: Tables<"products">;
 
   let photoRow: HTMLElement;
-  let photoRowScroll: "start" | "end" | "none" = "start";
-
-  function checkPhotoRow() {
-    if (photoRow.scrollLeft === 0) {
-      photoRowScroll = "start";
-    } else if (photoRow.scrollWidth - photoRow.scrollLeft - photoRow.clientWidth < 1) {
-      photoRowScroll = "end";
-    } else {
-      photoRowScroll = "none";
-    }
-  }
 
   function scroll(direction: -1 | 1) {
     photoRow.scrollBy({
@@ -25,11 +13,6 @@
       behavior: "smooth",
     });
   }
-
-  onMount(() => {
-    photoRow.addEventListener("scroll", checkPhotoRow);
-    return () => photoRow.removeEventListener("scroll", checkPhotoRow);
-  });
 </script>
 
 <li class="group">
@@ -37,14 +20,12 @@
     <!-- Photo row container -->
     <div class="relative">
       <!-- Previous photo -->
-      {#if photoRowScroll !== "start"}
-        <button
-          on:click|preventDefault={() => scroll(-1)}
-          transition:fade={{ duration: 100 }}
-          class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
-          <iconify-icon icon="ic:round-chevron-left" class="text-lg"></iconify-icon>
-        </button>
-      {/if}
+      <button
+        on:click|preventDefault={() => scroll(-1)}
+        transition:fade={{ duration: 100 }}
+        class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
+        <iconify-icon icon="ic:round-chevron-left" class="text-lg"></iconify-icon>
+      </button>
 
       <!-- Photo row -->
       <div
@@ -61,14 +42,12 @@
       </div>
 
       <!-- Next photo -->
-      {#if photoRowScroll !== "end"}
-        <button
-          on:click|preventDefault={() => scroll(1)}
-          transition:fade={{ duration: 100 }}
-          class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
-          <iconify-icon icon="ic:round-chevron-right" class="text-lg"></iconify-icon>
-        </button>
-      {/if}
+      <button
+        on:click|preventDefault={() => scroll(1)}
+        transition:fade={{ duration: 100 }}
+        class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
+        <iconify-icon icon="ic:round-chevron-right" class="text-lg"></iconify-icon>
+      </button>
     </div>
 
     <div class="text-sm">
