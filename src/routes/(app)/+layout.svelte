@@ -59,11 +59,17 @@
         class="absolute py-2 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm z-30"
         transition:fade={{ duration: 100 }}>
         <div class="hover:bg-neutral-100 px-4 py-2">
-          <a href="/profile">
-            <h1 class="font-semibold">
-              {data.session?.user.user_metadata.first_name} {data.session?.user.user_metadata.last_name}
-            </h1>
-            <h2>{data.session?.user.email}</h2>
+          <a href="/profile" class="flex gap-2">
+            <img
+              src="https://api.dicebear.com/7.x/lorelei/svg?seed={data.session?.user.email}"
+              class="aspect-square w-sm"
+              alt={data.session?.user.email}>
+            <div>
+              <h1 class="font-semibold">
+                {data.session?.user.user_metadata.first_name} {data.session?.user.user_metadata.last_name}
+              </h1>
+              <h2>{data.session?.user.email}</h2>
+            </div>
           </a>
         </div>
 
