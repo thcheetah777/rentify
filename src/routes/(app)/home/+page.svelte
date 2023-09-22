@@ -111,18 +111,19 @@
   <div class="mt-nav px-sm pt-4 pb-sm">
     <ul class="grid grid-cols-4 gap-x-6 gap-y-sm">
       {#each data.products as product (product.id)}
-        <li class="space-y-4">
-          <img
-            src={product.photo}
-            alt={product.category}
-            class="rounded-xl aspect-[10/9] object-cover" />
-
-          <div class="text-sm">
-            <h1 class="font-semibold">
-              {product.category[0].toUpperCase() + product.category.slice(1)}
-            </h1>
-            <h2 class="text-neutral-500">{USDollar.format(product.price)}</h2>
-          </div>
+        <li>
+          <a href="/item/{product.id}" class="space-y-4">
+            <img
+              src={product.photos?.[0]}
+              alt={product.category}
+              class="rounded-xl aspect-[10/9] object-cover" />
+            <div class="text-sm">
+              <h1 class="font-semibold">
+                {product.category[0].toUpperCase() + product.category.slice(1)}
+              </h1>
+              <h2 class="text-neutral-500">{USDollar.format(product.price)}</h2>
+            </div>
+          </a>
         </li>
       {/each}
     </ul>

@@ -28,7 +28,7 @@
 
 <!-- Navbar cuz I'm lazy -->
 <nav
-  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border border-border bg-white z-10 gap-sm">
+  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border-b border-border bg-white z-10 gap-sm">
   <header>
     <a href="/"><Logo class="text-2xl" /></a>
   </header>

@@ -13,28 +13,28 @@ export interface Database {
     Tables: {
       products: {
         Row: {
+          category: string
           created_at: string
           id: number
+          photos: string[] | null
           price: number
           stars: number
-          category: string
-          photo: string
         }
         Insert: {
+          category?: string
           created_at?: string
           id?: number
+          photos?: string[] | null
           price: number
-          stars: number
-          category: string
-          photo: string
+          stars?: number
         }
         Update: {
+          category?: string
           created_at?: string
           id?: number
+          photos?: string[] | null
           price?: number
           stars?: number
-          category?: string
-          photo?: string
         }
         Relationships: []
       }
