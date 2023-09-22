@@ -28,7 +28,7 @@
 
 <!-- Navbar cuz I'm lazy -->
 <nav
-  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border-b border-border bg-white z-10 gap-sm">
+  class="flex items-center justify-between h-nav fixed top-0 w-full px-sm border-b border-border bg-white z-20 gap-sm">
   <header>
     <a href="/"><Logo class="text-2xl" /></a>
   </header>
@@ -56,7 +56,7 @@
     <!-- Options dropdown -->
     {#if profileDropdown}
       <div
-        class="absolute py-2 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm z-20"
+        class="absolute py-2 w-64 right-0 rounded-xl shadow-around top-12 bg-white text-sm z-30"
         transition:fade={{ duration: 100 }}>
         <div class="hover:bg-neutral-100 px-4 py-2">
           <a href="/profile">

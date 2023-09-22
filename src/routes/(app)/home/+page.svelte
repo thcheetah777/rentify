@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { PageData } from "./$types";
-  import { afterUpdate } from "svelte";
+  import { afterUpdate, onMount } from "svelte";
   import { USDollar, cn } from "$lib/utils";
   import { categories } from "$lib/categories";
   import { fade } from "svelte/transition";
@@ -33,7 +33,21 @@
     categoryBar.scrollBy(direction * 2000, 0);
   }
 
-  afterUpdate(() => {
+  function scrollNextElement(this: HTMLElement) {
+    this.nextElementSibling?.scrollBy({
+      left: -250,
+      behavior: "smooth",
+    });
+  }
+
+  function scrollPreviousElement(this: HTMLElement) {
+    this.previousElementSibling?.scrollBy({
+      left: 250,
+      behavior: "smooth",
+    });
+  }
+
+  onMount(() => {
     document.addEventListener("scroll", checkTopOfPage);
     categoryBar.addEventListener("scroll", checkCategoryBar);
 
@@ -46,7 +60,7 @@
 
 <nav
   class={cn(
-    "px-12 bg-white fixed top-nav border-border w-full h-nav flex items-center gap-4",
+    "px-12 bg-white fixed top-nav border-border w-full h-nav flex items-center gap-4 z-10",
     { "shadow-md": !topOfPage }
   )}>
   <!-- Categories bar -->
@@ -111,12 +125,37 @@
   <div class="mt-nav px-sm pt-4 pb-sm">
     <ul class="grid grid-cols-4 gap-x-6 gap-y-sm">
       {#each data.products as product (product.id)}
-        <li>
+        <li class="group">
           <a href="/item/{product.id}" class="space-y-4">
-            <img
-              src={product.photos?.[0]}
-              alt={product.category}
-              class="rounded-xl aspect-[10/9] object-cover" />
+            <!-- Photo row container -->
+            <div class="relative">
+              <!-- Previous photo -->
+              <button
+                on:click|preventDefault={scrollNextElement}
+                class="absolute left-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
+                <iconify-icon icon="ic:round-chevron-left" class="text-lg"></iconify-icon>
+              </button>
+
+              <!-- Photo row -->
+              <div class="aspect-[10/9] overflow-x-auto flex snap-x snap-mandatory no-scrollbar rounded-xl">
+                {#if product.photos}
+                  {#each product.photos as photo}
+                    <img
+                      src={photo}
+                      alt={product.category}
+                      class="w-full h-full object-cover flex-shrink-0 snap-center" />
+                  {/each}
+                {/if}
+              </div>
+
+              <!-- Next photo -->
+              <button
+                on:click|preventDefault={scrollPreviousElement}
+                class="absolute right-2 top-1/2 -translate-y-1/2 rounded-full aspect-square h-sm shadow-md bg-white hover:scale-110 active:scale-smaller duration-200 flex justify-center items-center opacity-0 group-hover:opacity-90 hover:!opacity-100">
+                <iconify-icon icon="ic:round-chevron-right" class="text-lg"></iconify-icon>
+              </button>
+            </div>
+
             <div class="text-sm">
               <h1 class="font-semibold">
                 {product.category[0].toUpperCase() + product.category.slice(1)}
